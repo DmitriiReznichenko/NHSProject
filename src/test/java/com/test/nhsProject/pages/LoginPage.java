@@ -2,6 +2,8 @@ package com.test.nhsProject.pages;
 
 import com.test.nhsProject.utils.ConfigReader;
 import org.checkerframework.checker.units.qual.C;
+import org.junit.Assert;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,9 +25,11 @@ public class LoginPage {
 
     public void loginAsAdmin(String userName,String password) throws InterruptedException {
         String name, passwrd;
-        if (userName.equals("validUserName")){
-            name=ConfigReader.readProperty("adminUserName");
-        }else {
+        if (userName.equals("validUserName")) {
+            name = ConfigReader.readProperty("adminUserName");
+        } else if (userName.equals("blankUserName")) {
+            name="";
+    }else {
             name=ConfigReader.readProperty("invalidUserName");
         }
         userNameField.sendKeys(name);
@@ -41,5 +45,11 @@ public class LoginPage {
     public void clickSignInBtn() throws InterruptedException {
         signInBtn.click();
     }
+    public void getErrorMessage(WebDriver driver,String message){
+        Alert alert=driver.switchTo().alert();
+        Assert.assertEquals(message,alert.getText());
+
+    }
+
 
 }

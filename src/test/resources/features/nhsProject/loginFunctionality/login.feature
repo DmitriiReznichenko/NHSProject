@@ -28,3 +28,9 @@ Feature: Testing the login positive and negative functionalities
     And the user press the SignIn button
     Then the user validates title "LoginPage"
     And the user does not see title "NHS patients"
+
+#  Scenario: NHS Login Negative testing with blank credentials
+#    When the user enters the username "blankUserName" and password "blankPassword"
+#    And the user press the SignIn button
+#    Then the user validates message "message"
+#    And the user validates title "LoginPage"

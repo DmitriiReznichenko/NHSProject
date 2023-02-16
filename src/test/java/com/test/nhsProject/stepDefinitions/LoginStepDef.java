@@ -38,5 +38,9 @@ public class LoginStepDef {
     public void the_user_does_not_see_title(String title) {
         Assert.assertNotEquals(title, driver.getTitle());
     }
+    @Then("the user validates message {string}")
+    public void the_user_validates_message(String message) {
+       loginPage.getErrorMessage(driver,message);
+    }
 
 }
