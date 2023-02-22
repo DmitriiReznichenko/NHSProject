@@ -7,7 +7,7 @@ import io.cucumber.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-import java.util.Objects;
+
 
 public class LoginStepDef {
     WebDriver driver= DriverHelper.getDriver();
@@ -23,11 +23,11 @@ public class LoginStepDef {
 
     }
     @When("the user enters the username {string} and password {string}")
-    public void the_user_enters_the_username_and_password(String userName, String password) throws InterruptedException {
+    public void the_user_enters_the_username_and_password(String userName, String password){
         loginPage.loginAsAdmin(userName,password);
     }
     @When("the user press the SignIn button")
-    public void the_user_press_the_sign_in_button() throws InterruptedException {
+    public void the_user_press_the_sign_in_button(){
         loginPage.clickSignInBtn();
     }
     @Then("the user validates title {string}")
@@ -39,7 +39,7 @@ public class LoginStepDef {
         Assert.assertNotEquals(title, driver.getTitle());
     }
     @Then("the user validates message {string}")
-    public void the_user_validates_message(String message) {
+    public void the_user_validates_message(String message){
        loginPage.getErrorMessage(driver,message);
     }
 
