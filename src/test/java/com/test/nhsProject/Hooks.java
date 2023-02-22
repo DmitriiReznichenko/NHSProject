@@ -16,11 +16,9 @@ public class Hooks {
         driver.get(ConfigReader.readProperty("nhsUrl"));
     }
     @After
-    public void tearDown(Scenario scenario){
+    public void tearDown(Scenario scenario) {
         BrowserUtils.getScreenShotCucumber(scenario,driver);
         driver.quit();
-
-
     }
 }
 

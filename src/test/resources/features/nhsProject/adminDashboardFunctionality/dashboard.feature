@@ -1,8 +1,8 @@
 @regression @smoke
-
 Feature: Testing of NHS Dashboard for Admin User
 
-  Background: Given the user navigate to the NHS website
+  Background:
+    Given the user navigate to the NHS website
     When the user enters the username "validUserName" and password "validPassword"
     And the user press the SignIn button
 
