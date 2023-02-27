@@ -4,6 +4,7 @@ import com.test.nhsProject.utils.BrowserUtils;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -20,6 +21,14 @@ public class DashboardAdminPage {
     @FindBy(xpath = "//div[@class='col-xs-3']//i")
     List<WebElement> allIconNames;
 
+    @FindBy (linkText = "Add patient")
+    WebElement addPatientButton;
+
+    @FindBy(xpath = "//input[@placeholder='Search patient waiting...']")
+    WebElement searchPatientWaiting;
+    @FindBy(xpath = "//table[@id='patients-waiting']//tbody//tr")
+    List<WebElement> rowsPatientsWaitingTable;
+
     public int getCountOfAllCards(){
         return allCards.size();
     }
@@ -32,7 +41,17 @@ public class DashboardAdminPage {
                 break;
             }
             }
-
+    }
+    public void clickAddPatientBtn(){
+        addPatientButton.click();
+    }
+    public void validatingPatientIsAddedToPatientsWaitingTable(String firstName,String lastName,String no_){
+        Assert.assertTrue(rowsPatientsWaitingTable.get(rowsPatientsWaitingTable.size() - 1)
+                .getText().contains( no_+ " "+ firstName +" "+ lastName));
+    }
+    public void openPatientPage(WebDriver driver) {
+        Actions actions=new Actions(driver);
+        actions.doubleClick(rowsPatientsWaitingTable.get(rowsPatientsWaitingTable.size()-1)).perform();
 
     }
 }
