@@ -21,6 +21,11 @@ public class DashboardAdminStepDef {
     public void the_user_validates_the_the_and_the_of_the_card(String expectedTitle, String expectedBackgroundColor,String iconName) {
         dashboardAdminPage.validateTitlesAndColorsOfCards(expectedTitle,expectedBackgroundColor,iconName);
     }
+    @Then("the user can see the headers  with information: {string}, {string}, {string}, {string}.")
+    public void the_user_can_see_the_headers_with_information(String headerNo_T1, String headerPatientsWithRooms, String headerRoom, String headerScore_T1) {
+        dashboardAdminPage.validateHeadersForTable_PatientsWithRooms(headerNo_T1,headerPatientsWithRooms,headerRoom,headerScore_T1);
+
+    }
 
     @Then("the user should be able to see the patient {string},{string},{string} is added to the main page under Patients waiting")
     public void the_user_should_be_able_to_see_the_patient_is_added_to_the_main_page_under_patients_waiting(String firstName,
