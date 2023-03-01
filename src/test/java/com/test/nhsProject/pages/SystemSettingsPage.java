@@ -1,9 +1,9 @@
 package com.test.nhsProject.pages;
 
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -44,14 +44,10 @@ public class SystemSettingsPage {
         Collections.sort(sortedListOfDisease);
         Assert.assertEquals(sortedListOfDisease,listOfDisease);
     }
-    public void deleteDisease(WebDriver driver,String disease)  {
-        for (WebElement webElement : listOfWebElement) {
-            if (webElement.getText().equals(disease)) {
-                Actions actions = new Actions(driver);
-                actions.moveToElement(webElement).moveByOffset(290, 0).click().build().perform();
-                break;
-            }
-        }
+    public void deleteDisease(WebDriver driver,String disease){
+        String path1 = "//td[.='";
+        String path2= "']/following-sibling::td/input";
+        driver.findElement(By.xpath(path1+disease+path2)).click();
         deleteDiseaseBtn.click();
     }
 
