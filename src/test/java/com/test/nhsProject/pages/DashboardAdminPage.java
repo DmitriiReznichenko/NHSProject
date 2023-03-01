@@ -40,6 +40,8 @@ public class DashboardAdminPage {
     WebElement searchPatientWaiting;
     @FindBy(xpath = "//table[@id='patients-waiting']//tbody//tr")
     List<WebElement> rowsPatientsWaitingTable;
+    @FindBy (linkText = "System settings")
+    WebElement systemSettingButton;
 
 
     public int getCountOfAllCards(){
@@ -73,7 +75,8 @@ public class DashboardAdminPage {
     public void openPatientPage(WebDriver driver) {
         Actions actions=new Actions(driver);
         actions.doubleClick(rowsPatientsWaitingTable.get(rowsPatientsWaitingTable.size()-1)).perform();
-
-
+    }
+    public void clickSystemSettingsButton(){
+        systemSettingButton.click();
     }
 }
