@@ -22,10 +22,8 @@ systemSettingsPage.addDisease(fakeTestData.getDisease(),fakeTestData.getScoreDis
     systemSettingsPage.isOrderOfDiseaseAlphabetical();
     }
     @Then("the user will be able to delete the created diseases")
-    public void the_user_will_be_able_to_delete_the_created_diseases()  {
+    public void the_user_will_be_able_to_delete_the_created_diseases(){
         systemSettingsPage.deleteDisease(driver,fakeTestData.getDisease());
-        System.out.println(fakeTestData.getDisease());
-
     }
     @Then("the user does not see deleted disease in the table")
     public void the_user_does_not_see_deleted_disease_in_the_table() {

@@ -1,4 +1,5 @@
 @regression @smoke
+#  Creating TestData from FakerJavaClass
   Feature: Testing of System Settings functionality for Admin User NHS Dashboard
 Scenario: NHS Positive Testing for Adding new Disease
   Given the user navigate to the NHS website
