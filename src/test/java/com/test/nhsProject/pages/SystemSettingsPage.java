@@ -25,12 +25,16 @@ public class SystemSettingsPage {
     List<WebElement> listOfWebElement;
     @FindBy(xpath = "//input[@value='Delete diseases']")
     WebElement deleteDiseaseBtn;
-
-
     public void addDisease(String disease,String score)  {
-        diseaseNameField.sendKeys(disease);
-        diseaseScoreField.sendKeys(score);
-        addDiseaseBtn.click();
+        List<String> listOfDisease=new ArrayList<>();
+        for (WebElement webElement : listOfWebElement) {
+            listOfDisease.add(webElement.getText());
+        }
+        if (!listOfDisease.contains(disease)) {
+            diseaseNameField.sendKeys(disease);
+            diseaseScoreField.sendKeys(score);
+            addDiseaseBtn.click();
+        }
     }
     public void isOrderOfDiseaseAlphabetical(){
         List<String> listOfDisease=new ArrayList<>();
@@ -44,14 +48,17 @@ public class SystemSettingsPage {
         Collections.sort(sortedListOfDisease);
         Assert.assertEquals(sortedListOfDisease,listOfDisease);
     }
-    public void deleteDisease(WebDriver driver,String disease){
+    public void deleteDisease(WebDriver driver,String disease) {
         String path1 = "//td[.='";
         String path2= "']/following-sibling::td/input";
-        driver.findElement(By.xpath(path1+disease+path2)).click();
+        driver.findElement(By.xpath(path1+disease.charAt(0)+disease.substring(1).toLowerCase()+path2)).click();
         deleteDiseaseBtn.click();
     }
-
-
-
-
+    public void validatingDeletingDisease(String disease){
+        List<String> updatedListOfDisease=new ArrayList<>();
+        for (WebElement webElement : listOfWebElement) {
+            updatedListOfDisease.add(webElement.getText());
+        }
+        Assert.assertFalse(updatedListOfDisease.contains(disease));
+    }
 }
