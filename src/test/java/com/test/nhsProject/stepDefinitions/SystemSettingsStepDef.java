@@ -32,4 +32,20 @@ public class SystemSettingsStepDef {
     public void the_user_does_not_see_deleted_disease_in_the_table() {
         systemSettingsPage.validatingDeletingDisease(fakeTestData.getDisease());
     }
+    @When("the user should be able to add the room with name")
+    public void the_user_should_be_able_to_add_the_room_with_name() {
+        systemSettingsPage.addNewRoom(fakeTestData.getNameRoom());
+    }
+    @Then("the user validates the rooms from the system are displayed in a table by default order of rooms name")
+    public void the_user_validates_the_rooms_from_the_system_are_displayed_in_a_table_by_default_order_of_rooms_name() {
+        systemSettingsPage.isOrderOfRoomTableAlphabetical();
+    }
+    @Then("the user will be able to delete the created rooms")
+    public void the_user_will_be_able_to_delete_the_created_rooms() {
+        systemSettingsPage.deleteRoom(fakeTestData.getNameRoom());
+    }
+    @Then("the user does not see deleted rooms in the table")
+    public void the_user_does_not_see_deleted_rooms_in_the_table() {
+        systemSettingsPage.validatingRoomIsDeleted(fakeTestData.getNameRoom());
+    }
 }
