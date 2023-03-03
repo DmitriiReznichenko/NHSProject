@@ -3,6 +3,7 @@ package com.test.nhsProject.pages;
 import com.test.nhsProject.utils.ConfigReader;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +23,7 @@ public class LoginPage {
     @FindBy(tagName = "button")
     WebElement signInBtn;
 
-    public void loginAsAdmin(String userName,String password) {
+    public void loginToWebsite(String userName, String password) {
         String name, passwrd;
         if (userName.equals("validUserName")) {
             name = ConfigReader.readProperty("adminUserName");
@@ -48,6 +49,10 @@ public class LoginPage {
         Alert alert=driver.switchTo().alert();
         Assert.assertEquals(message,alert.getText());
 
+    }
+    public void logIn2(String userName,String password){
+        userNameField.sendKeys(userName);
+        passwordField.sendKeys(password, Keys.ENTER);
     }
 
 

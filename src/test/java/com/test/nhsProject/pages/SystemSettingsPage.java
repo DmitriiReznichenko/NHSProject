@@ -2,6 +2,7 @@ package com.test.nhsProject.pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,6 +40,13 @@ public class SystemSettingsPage {
     WebElement deleteRoomsBtb;
     @FindBy(className = "dataTables_empty")
     WebElement emptyTableMessage;
+    @FindBy (name = "username")
+    WebElement userNameField;
+    @FindBy(name = "password")
+    WebElement passwordField;
+    @FindBy (linkText = "Logout")
+    WebElement logOutBtn;
+
 
     public void addDisease(String disease, String score) {
         List<String> listOfDisease = new ArrayList<>();
@@ -113,4 +121,12 @@ public class SystemSettingsPage {
         searchBarForRoomTable.sendKeys(nameRoom);
         Assert.assertTrue(emptyTableMessage.isDisplayed());
     }
+    public void addNewUser(String userName,String password){
+        userNameField.sendKeys(userName);
+        passwordField.sendKeys(password, Keys.ENTER);
+    }
+    public void logOutSystem(){
+        logOutBtn.click();
+    }
+
 }
