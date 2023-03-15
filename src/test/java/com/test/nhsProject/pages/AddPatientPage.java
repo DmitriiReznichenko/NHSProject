@@ -57,7 +57,7 @@ public class AddPatientPage {
         Assert.assertTrue(sexLabel.isDisplayed() && BrowserUtils.getText(sexLabel).equals(expectedSexLabel));
     }
     public void inputPatientDataAndClickAddPatientBtn(String firstName,String lastName,
-                                                      String hospitalNo,String dateOfBirth,String sex){
+                                                      String hospitalNo,String dateOfBirth,String sex) {
         firstNameField.sendKeys(firstName);
         lastNameField.sendKeys(lastName);
         hospitalNo_Field.sendKeys(hospitalNo);
@@ -67,5 +67,10 @@ public class AddPatientPage {
         }else {femaleRadioBtn.click();
         }
         addPatientButton.click();
+    }
+    public void validatingPatientIsAddedToPatientsWaitingTable(String firstName, String lastName, String no_) {
+        Assert.assertTrue(DashboardAdminPage.rowsPatientsWaitingTable.get(DashboardAdminPage.rowsPatientsWaitingTable.size() - 1)
+                .getText().contains(no_ + " " + firstName + " " + lastName));
+
     }
 }

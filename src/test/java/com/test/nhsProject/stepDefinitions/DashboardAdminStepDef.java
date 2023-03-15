@@ -15,6 +15,7 @@ public class DashboardAdminStepDef {
     DashboardAdminPage dashboardAdminPage=new DashboardAdminPage(driver);
     PatientPage patientPage=new PatientPage(driver);
 
+
     @Then("the user validates the amount of cards on dashboard is {int}")
     public void the_user_validates_the_amount_of_cards_on_dashboard_is(Integer expectedAmountOfcards) {
         Assert.assertEquals((int) expectedAmountOfcards,dashboardAdminPage.getCountOfAllCards());
@@ -29,25 +30,15 @@ public class DashboardAdminStepDef {
 
     }
 
-    @Then("the user should be able to see the patient {string},{string},{string} is added to the main page under Patients waiting")
-    public void the_user_should_be_able_to_see_the_patient_is_added_to_the_main_page_under_patients_waiting(String firstName,
-                                                                                                            String lastName,
-                                                                                                            String no_) {
-        dashboardAdminPage.validatingPatientIsAddedToPatientsWaitingTable(firstName,lastName,no_);
-    }
+
 
     @Then("the user deletes the patient")
     public void the_user_deletes_the_patient()  {
         dashboardAdminPage.openPatientPage(driver);
         patientPage.deletePatient();
-
     }
     @When("the user clicks the system setting")
     public void the_user_clicks_the_system_setting() {
 dashboardAdminPage.clickSystemSettingsButton();
     }
-
-
-
-
 }
