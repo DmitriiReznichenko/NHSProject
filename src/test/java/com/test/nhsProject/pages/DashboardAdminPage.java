@@ -2,6 +2,7 @@ package com.test.nhsProject.pages;
 
 import com.test.nhsProject.utils.BrowserUtils;
 import org.junit.Assert;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -40,17 +41,21 @@ public class DashboardAdminPage {
     WebElement addPatientButton;
 
     @FindBy(xpath = "//table[@id='patients-waiting']//tbody//tr")
+    static
     List<WebElement> rowsPatientsWaitingTable;
     @FindBy(linkText = "System settings")
     WebElement systemSettingButton;
     @FindBy(xpath = "//*[@id='patients-in-hospital']//td")
     List<WebElement> allWebElementsFromPatientsWithRoomsTable;
-    @FindBy(xpath = "//*[@id='patients-in-hospital']//td")
+    @FindBy(xpath = "//*[@id='patients-waiting']//td")
     List<WebElement> allWebElementsFromPatientsWaitingTable;
     @FindBy(xpath = "//*[@id='patients-in-hospital']//td")
     List<WebElement> allWebElementsFromFreeRoomsTable;
     @FindBy (xpath = "//a[@href='/']")
     WebElement logOutBtn;
+
+    @FindBy(xpath = "//*[@placeholder='Search patient waiting...']")
+    WebElement searchPatientWaitingBar;
 
 
 
@@ -81,10 +86,7 @@ public class DashboardAdminPage {
         addPatientButton.click();
     }
 
-    public void validatingPatientIsAddedToPatientsWaitingTable(String firstName, String lastName, String no_) {
-        Assert.assertTrue(rowsPatientsWaitingTable.get(rowsPatientsWaitingTable.size() - 1)
-                .getText().contains(no_ + " " + firstName + " " + lastName));
-    }
+
 
     public void openPatientPage(WebDriver driver) {
         Actions actions = new Actions(driver);
@@ -123,4 +125,22 @@ public class DashboardAdminPage {
         allDataFromAllTables.addAll(allDataFromFreeRoomsTable);
         return allDataFromAllTables;
     }
+    public List<String> searchInPatientsWaitingTable(String keyWord){
+        searchPatientWaitingBar.clear();
+        searchPatientWaitingBar.sendKeys(keyWord);
+        List<String> allDataFromPatientsWaitingTable = new ArrayList<>();
+        for (WebElement webelement : allWebElementsFromPatientsWaitingTable
+        ) {
+            allDataFromPatientsWaitingTable.add(webelement.getText());
+        }
+        return allDataFromPatientsWaitingTable;
+    }
+    public void validatingSearchForPatientWaitingBarFunctionality(String firstName,String lastName,String no_) {
+        Assert.assertTrue(searchInPatientsWaitingTable(firstName).toString().contains(no_ + ", " + firstName + " " + lastName));
+        Assert.assertTrue(searchInPatientsWaitingTable(lastName).toString().contains(no_ + ", " + firstName + " " + lastName));
+        Assert.assertTrue(searchInPatientsWaitingTable(firstName + " " + lastName).toString().contains(no_ + ", " + firstName + " " + lastName));
+        Assert.assertTrue(searchInPatientsWaitingTable(no_).toString().contains(no_ + ", " + firstName + " " + lastName));
+
+    }
 }
+
